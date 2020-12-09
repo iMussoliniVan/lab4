@@ -124,6 +124,22 @@ public class GraphicsDisplay extends JPanel {
         canvas.setColor(Color.RED);
         canvas.setPaint(Color.RED);
         for (Double[] point : graphicsData) {
+            canvas.setColor(Color.RED);
+            double p = point[1] - point[1] % 1;
+            System.out.println(p);
+            boolean check = false;
+            while(Math.abs(p) >= 1){
+                if(Math.abs(p % 10) % 2 == 0){
+                    check = true;
+                    p /= 10;
+                }else{
+                    check = false;
+                    break;
+                }
+            }
+            if(check){
+                canvas.setColor(Color.GREEN);
+            }
             canvas.setStroke(markerStroke);
             Point2D.Double center = xyToPoint(point[0], point[1]);
             canvas.draw(new Line2D.Double(center, shiftPoint(center, -5.5, 0)));
